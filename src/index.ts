@@ -1,7 +1,7 @@
 import { SendSingleResponse, SendSingleRequest, SendBatchResponse, SendBatchRequest, MessageStatusResponse } from "./types";
 
 
-export class NotifyAfricaSMS {
+export class NotifyAfrica {
   private baseUrl: string;
   private apiToken: string;
 
@@ -12,7 +12,7 @@ export class NotifyAfricaSMS {
 
   /**
    * Sends a single SMS message.
-   * @param phoneNumber The recipient's phone number (e.g., "255689737459").
+   * @param phoneNumber The recipient's phone number (e.g., "2556XXXXX459").
    * @param message The message content.
    * @param senderId The sender ID (e.g., "137").
    * @returns The response data with messageId and status.
@@ -59,7 +59,7 @@ export class NotifyAfricaSMS {
 
   /**
    * Sends a batch of SMS messages to multiple recipients.
-   * @param phoneNumbers Array of recipient phone numbers (e.g., ["255763765548", "255689737839"]).
+   * @param phoneNumbers Array of recipient phone numbers (e.g., ["2556XXXXX459", "2556XXXXX459"]).
    * @param message The message content.
    * @param senderId The sender ID (e.g., "137").
    * @returns The response data with messageCount, creditsDeducted, and remainingBalance.
