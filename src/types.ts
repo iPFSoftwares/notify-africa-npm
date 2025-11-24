@@ -1,43 +1,37 @@
-export interface OTPXOptions {
-  algorithm?: 'sha1' | 'sha256' | 'sha512';
-  digits?: number;
-  period?: number;
-  window?: number;
-  counter?: number;
-  secretEncoding?: 'ascii' | 'base32' | 'hex';
+interface SendSingleRequest {
+  phone_number: string;
+  message: string;
+  sender_id: string;
 }
 
-export interface HOTPOptions extends OTPXOptions {
-  counter: number;
+interface SendSingleResponse {
+  messageId: string;
+  status: string;
 }
 
-export interface TOTPOptions extends OTPXOptions {
-  period: number;
-  timestamp?: number;
+interface SendBatchRequest {
+  phone_numbers: string[];
+  message: string;
+  sender_id: string;
 }
 
-export interface OTPXResult {
-  token: string;
-  expiresAt?: Date;
-  remainingTime?: number;
+interface SendBatchResponse {
+  messageCount: number;
+  creditsDeducted: number;
+  remainingBalance: number;
 }
 
-export interface OTPXVerificationResult {
-  isValid: boolean;
-  isExpired?: boolean;
-  delta?: number;
+interface MessageStatusResponse {
+  messageId: string;
+  status: string;
+  sentAt: string | null;
+  deliveredAt: string | null;
 }
 
-export class OTPXError extends Error {
-  constructor(
-    message: string,
-    public code: string,
-    public details?: any
-  ) {
-    super(message);
-    this.name = 'OTPXError';
-  }
-}
-
-export type OTPAlgorithm = 'sha1' | 'sha256' | 'sha512';
-export type SecretEncoding = 'ascii' | 'base32' | 'hex';
+export type {
+  SendSingleRequest,
+  SendSingleResponse,
+  SendBatchRequest,
+  SendBatchResponse,
+  MessageStatusResponse,
+};

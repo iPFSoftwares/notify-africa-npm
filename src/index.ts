@@ -6,7 +6,7 @@ export class NotifyAfricaSMS {
 
   constructor(apiToken: string, baseUrl: string = "https://api.notify.africa") {
     this.apiToken = apiToken;
-    this.baseUrl = baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl; // Normalize URL
+    this.baseUrl = baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl;
   }
 
   /**
