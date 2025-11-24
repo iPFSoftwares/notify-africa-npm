@@ -39,9 +39,6 @@ import { NotifyAfricaSMS } from 'notify-africa';
 
 const apiToken = 'your-api-token-here'; // Replace with your Notify Africa API token
 const client = new NotifyAfricaSMS(apiToken); // Uses default base URL: https://api.notify.africa
-
-// Or specify a custom base URL (e.g., for local testing)
-const customClient = new NotifyAfricaSMS(apiToken, 'http://localhost:3000');
 ```
 
 ### Send a Single Message
