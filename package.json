@@ -1,17 +1,17 @@
 {
   "name": "notify-africa",
-  "description": "A minimal, configurable TypeScript npm package starter template with build and test setup.",
-  "version": "0.0.0",
+  "description": "SMS, WhatsApp, Voice, AI Chatbots, and CRM - all in one powerful platform designed for businesses across Africa.",
+  "version": "0.1.0",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "homepage": "",
+  "homepage": "https://notify.africa/developers",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/tacheraSasi/notify-africa-npm.git"
   },
   "bugs": {
-    "url": ""
+    "url": "https://github.com/tacheraSasi/notify-africa-npm/issues"
   },
   "license": "MIT",
   "author": "Tachera Sasi <tacherasasi@gmail.com> (https://tachera.ekilie.com)",
@@ -24,12 +24,17 @@
     "typecheck": "tsc --noEmit"
   },
   "keywords": [
-    "npm-package",
-    "starter",
-    "template",
+    "notify-africa",
+    "sms",
+    "whatsapp",
+    "voice",
+    "chatbots",
+    "crm",
+    "africa",
+    "messaging",
+    "api",
     "typescript",
-    "javascript",
-    "library"
+    "javascript"
   ],
   "devDependencies": {
     "@types/jest": "^30.0.0",
@@ -39,6 +44,6 @@
     "typescript": "^5.5.4"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18.0.0"
   }
 }
