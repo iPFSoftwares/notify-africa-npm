@@ -30,35 +30,48 @@ Or via yarn:
 yarn add notify-africa
 ```
 
-## Usage
+```ts
+import { NotifyAfrica } from "notify-africa-npm"; // or from the package when published
 
-### Import and Initialize
+const notifyAfrica = new NotifyAfrica(
+  process.env.NOTIFY_API_TOKEN || "your-token-here"
+);
 
-```typescript
-import { NotifyAfricaSMS } from 'notify-africa';
+async function run() {
+  // Send a single message
+  const single = await notifyAfrica.sendSingleMessage(
+    "255689737459",
+    "Hello from API Management endpoint!",
+    "137"
+  );
+  console.log(single); // { messageId: "156023", status: "PROCESSING" }
 
-const apiToken = 'your-api-token-here'; // Replace with your Notify Africa API token
-const client = new NotifyAfricaSMS(apiToken); // Uses default base URL: https://api.notify.africa
+  // Send a batch
+  const batch = await notifyAfrica.sendBatchMessages(
+    ["255763765548", "255689737839"],
+    "test",
+    "137"
+  );
+  console.log(batch); // { messageCount: 2, creditsDeducted: 2, remainingBalance: 1475 }
+
+  // Check status
+  const status = await notifyAfrica.checkMessageStatus("156022");
+  console.log(status); // { messageId: "156022", status: "SENT", sentAt: null, deliveredAt: "2025-11-13T12:34:08.540Z" }
+}
+
+run().catch(console.error);
 ```
 
-### Send a Single Message
-
-```typescript
-async function sendSingle() {
-  try {
-    const response = await client.sendSingleMessage(
-      '255689737459', // Phone number
-      'Hello from Notify Africa SDK!', // Message
-      '137' // Sender ID
-    );
     console.log('Single message sent:', response); // { messageId: '156023', status: 'PROCESSING' }
-  } catch (error) {
-    console.error('Error:', error.message);
-  }
+
+} catch (error) {
+console.error('Error:', error.message);
+}
 }
 
 sendSingle();
-```
+
+````
 
 ### Send Batch Messages
 
@@ -77,17 +90,17 @@ async function sendBatch() {
 }
 
 sendBatch();
-```
+````
 
 ### Check Message Status
 
 ```typescript
 async function checkStatus() {
   try {
-    const response = await client.checkMessageStatus('156022'); // Message ID
-    console.log('Message status:', response); // { messageId: '156022', status: 'SENT', sentAt: null, deliveredAt: '2025-11-13T12:34:08.540Z' }
+    const response = await client.checkMessageStatus("156022"); // Message ID
+    console.log("Message status:", response); // { messageId: '156022', status: 'SENT', sentAt: null, deliveredAt: '2025-11-13T12:34:08.540Z' }
   } catch (error) {
-    console.error('Error:', error.message);
+    console.error("Error:", error.message);
   }
 }
 
@@ -99,7 +112,7 @@ checkStatus();
 ### Constructor
 
 ```typescript
-new NotifyAfricaSMS(apiToken: string, baseUrl?: string)
+new NotifyAfrica(apiToken: string, baseUrl?: string)
 ```
 
 - `apiToken`: Your Notify Africa API bearer token (required).
@@ -108,10 +121,12 @@ new NotifyAfricaSMS(apiToken: string, baseUrl?: string)
 ### Methods
 
 - **`sendSingleMessage(phoneNumber: string, message: string, senderId: string): Promise<SendSingleResponse>`**
+
   - Sends a single SMS.
   - Returns: `{ messageId: string, status: string }`
 
 - **`sendBatchMessages(phoneNumbers: string[], message: string, senderId: string): Promise<SendBatchResponse>`**
+
   - Sends SMS to multiple recipients.
   - Returns: `{ messageCount: number, creditsDeducted: number, remainingBalance: number }`
 
@@ -128,15 +143,15 @@ All methods are asynchronous and throw errors on failure.
 Create a service:
 
 ```typescript
-import { Injectable } from '@nestjs/common';
-import { NotifyAfricaSMS } from 'notify-africa';
+import { Injectable } from "@nestjs/common";
+import { NotifyAfrica } from "notify-africa";
 
 @Injectable()
 export class SmsService {
-  private client: NotifyAfricaSMS;
+  private client: NotifyAfrica;
 
   constructor() {
-    this.client = new NotifyAfricaSMS(process.env.NOTIFY_AFRICA_TOKEN);
+    this.client = new NotifyAfrica(process.env.NOTIFY_AFRICA_TOKEN);
   }
 
   async sendSingle(phone: string, message: string, senderId: string) {
