@@ -71,8 +71,6 @@ console.error('Error:', error.message);
 
 sendSingle();
 
-````
-
 ### Send Batch Messages
 
 ```typescript
